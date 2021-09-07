@@ -152,6 +152,20 @@ let &l:foldexpr =
   \ ? 'NestedMarkdownFolds()'
   \ : 'StackedMarkdownFolds()'
 
+if !exists('g:markdown_fold_remap_shortcuts')
+  let g:markdown_fold_remap_shortcuts = 1
+endif
+
+if g:markdown_fold_remap_shortcuts
+  " Previous heading, if any
+  nmap <buffer> <nowait> [ ?^#
+  " Next heading, if any
+  nmap <buffer> <nowait> ] /^#
+  " Toggle fold
+  nmap <buffer> <Space> za
+endif
+
+
 " Teardown {{{1
 if !exists("b:undo_ftplugin") | let b:undo_ftplugin = '' | endif
 let b:undo_ftplugin .= '
