@@ -8,7 +8,7 @@ function! StackedMarkdownFolds()
   elseif thisline =~ '^```$' && nextline =~ '^\s*$'  " end of a fenced block
     return "<2"
   endif
-  
+
   if HeadingDepth(v:lnum) > 0
     return ">1"
   else
@@ -94,7 +94,7 @@ function! s:HasSurroundingFencemarks(lnum)
   return fenceEndPosition != [0,0]
 endfunction
 
-function! s:FoldText()
+function! MarkdownFolding_FoldText()
   let level = HeadingDepth(v:foldstart)
   let indent = repeat('#', level)
   let title = substitute(getline(v:foldstart), '^#\+\s\+', '', '')
@@ -144,7 +144,7 @@ endif
 setlocal foldmethod=expr
 
 if g:markdown_fold_override_foldtext
-  let &l:foldtext = s:SID() . 'FoldText()'
+  let &l:foldtext = 'MarkdownFolding_FoldText()'
 endif
 
 let &l:foldexpr =
